@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <br/>   
+    <!-- <div class="row"> -->
+        {% if items == [] %}
+        <h4>No search Results for {{search}}</h4>
+        {% else %}
+        <h4>Search for {{search}}</h4>
+        {% for item in items %}
+        <a style="color: black; text-decoration: none;" href="{{url_for('preview', itemid = item.id)}}">
+            <div class="space">
+                <div style="display: flex; padding: 0;">
+                    <div style="width: 70px; height:70px; margin-right: 10px; border-radius: 10px; border: 1px solid rgba(0, 0, 0, 0.1);">
+                    <img style="width: 70px; height: 70px; border-radius: 10px; object-fit: cover;" src="{{item.image}}">
+                    </div>
+                    <div>
+                        <h6>{{item.name}}</h6>
+                        <h6 class="text-muted">Ghc{{ item.price }}</h6>
+                    </div> 
+                </div>
+            </div>
+            <br>
+        </a>
+        
+        {% endfor %}
+    {% endif %}
+    <!-- </div> -->
+</div>
+{% endblock %}

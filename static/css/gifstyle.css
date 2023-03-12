@@ -1,0 +1,120 @@
+html,body{
+    height: 100%;
+    /* body { */
+      /* background: linear-gradient(-45deg, #f5e50b, #09f143, #b11919, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite; */
+    /* }   */
+  }
+  /* .bg{
+      background-image: url("../img/one.gif");
+    
+      height: 100%; 
+      width: 100%;
+    
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    } */
+  
+    .gif{
+      color: black;
+      font-family: 'Poppins', sans-serif;
+      margin: auto;
+      text-align: center;
+      color:  rgb(255, 134, 154);;
+      /* padding-top: 45%; */
+    }
+  
+    .copy{
+      color: black;
+      font-family: 'Poppins', sans-serif;
+      font-weight: lighter;
+    }
+  
+  #hungry{
+    /* padding-top: 50%; */
+    /* padding-bottom: 45%; */
+    font-size: 30px; 
+  }
+  
+  #eat{
+    font-size: large;
+  }
+  
+  .button {
+    background-color:  rgb(255, 134, 154);;
+    border: none;
+    color: white;
+    padding: 10px 130px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+    border-radius: 16px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .empty-button {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 10px 130px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+    border-radius: 16px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  @keyframes gradient {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+    }
+  }
+  
+  .gif-support{
+    font-family: 'Montserrat', sans-serif;
+    padding: 0 20px 0 20px;
+    margin: 0;
+    font-size: 15px;
+  }
+  
+  /* #supp{
+    padding-left: 20px;
+    padding-right: 20px;
+  } */
+  
+  
+  .holdem{
+  position: absolute;
+      width: 100px;
+      height: 50px;
+      top: 50%;
+      left: 45%;
+      margin-left: -50px; /* margin is -0.5 * dimension */
+      margin-top: -25px; 
+      display: block;
+  }
+  
+  
+    
+    .copy{
+      text-align: center;
+      margin: auto;
+      /* margin-left: 30%;  */
+      padding-top: 15px;
+      padding-bottom: 15px;
+  
+  }

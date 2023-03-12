@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Ticketing</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+<style>
+.flow{
+  display: flex;
+  justify-content: space-between;
+}
+
+.button{
+  border: none;
+  width: 100%;
+  background-color:  rgb(255, 134, 154);;
+  border-radius: 10px;
+  color: white;
+  padding: 20px;
+  margin: 10px 0;
+  font-weight: 400;
+}
+
+</style>
+
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="nav navbar-nav">
+            <a class="nav-item nav-link active" href="#" aria-current="page">presto <span class="visually-hidden">(current)</span></a>
+            <a class="nav-item nav-link" href="#">{{event.name}}</a>
+        </div>
+    </nav>
+  </header>
+  <main>
+
+
+<div class="container">
+    <div class="card" style="border-radius: 10px; margin-top: 5vh; padding: 20px;">
+        <h1 style="text-align: center;">Ticket Id: {{ticket.id}}</h1>
+
+        <div style="display: flex; justify-content: space-between;">
+            <h6>Ticket Id:</h6>
+            <h6>{{ticket.id}}</h6>
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+            <h6>Name:</h6>
+            <h6>{{ticket.name}}</h6>
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+            <h6>totalTickets:</h6>
+            <h6>{{ticket.numberOfTickets}}</h6>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between;">
+            <h6>Ticket Date :</h6>
+            <h6> {{ticket.date_created.strftime("%c")}}</h6>
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+            <h6>Paid :</h6>
+            <h6> {{ticket.paid}}</h6>
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+            <h6>Phone :</h6>
+            <h6> {{ticket.phoneNumber}}</h6>
+        </div>
+
+       
+
+        <button class="button">Mark as scanned</button>
+    </div>
+</div>
+
+  </main>
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
+
+

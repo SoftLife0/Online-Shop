@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container">
+    <br/>
+    <h4>All Categories</h4>
+    <div class="row">
+        <a href="{{url_for('show', category='Tech')}}">
+            <button class="options-button"> <i class="fa fa-phone"></i> Technology</button>
+        </a>
+        <i class="" aria-hidden="true"></i>
+    </div>
+    <div class="row">
+        <a href="{{url_for('show', category='Jobs')}}">
+            <button class="options-button"> <i class="fas fa-briefcase"></i>Jobs</button>
+        </a>
+        <i class="" aria-hidden="true"></i>
+    </div>
+    <div class="row">
+        <a href="{{url_for('show', category='Fashion')}}">
+            <button class="options-button"> <i class="fas fa-shoe-prints"></i> Fashion</button>
+        </a>
+    </div>
+    <div class="row">
+        <a href="{{url_for('show', category='Medicine')}}">
+            <button class="options-button"> <i class="fas fa-user-md"></i> Medicine</button>
+        </a>
+    </div>
+    <div class="row">
+        <a href="{{url_for('show', category='vehicles')}}">
+            <button class="options-button"> <i class="fas fa-car"></i> Vehicles</button>
+        </a>
+    </div>
+    <div class="row">
+        <a href="{{url_for('show', category='animals')}}">
+            <button class="options-button"> <i class="fas fa-hippo"></i> Animals</button>
+        </a>
+    </div>
+    <div class="row">
+        <a href="{{url_for('show', category='food')}}">
+            <button class="options-button"> <i class="fas fa-file-medical"></i> Food</button>
+        </a>
+    </div>
+    <div class="row">
+        <a href="{{url_for('show', category='pets')}}">
+            <button class="options-button"> <i class="fas fa-dog"></i> Pets</button>
+        </a>
+    </div>
+
+
+    <div class="row">
+        <a href="{{url_for('show', category='others')}}">
+            <button class="options-button"> <i class="fas fa-shopping-basket"></i> Others</button>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

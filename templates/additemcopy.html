@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+  <br/>
+  {% if update %}
+    <h1>Update an item</h1>
+  {% else  %}
+  <h1>Add an item</h1>
+  {%endif%}
+
+
+<h4 id="demo"></h4>
+    <form action="" novalidate method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <label for="image-picker">
+            <div>
+                {% if update %}
+                <img id="image-preview" style="height: 30vh; object-fit:cover" src={{item.image}} alt="your image" />
+                {% else %}
+                <img id="image-preview" style="height: 30vh; object-fit:contain" src="{{url_for('static', filename='img/camera.png')}}" alt="your image" />
+                {% endif %}
+            </div>      
+            <h6 id="error" style="color: red; display: none;">Please upload an image to continue</h6>
+        </label>
+    
+        <input style="display:none" id="image-picker" type="file" required="required" accept="image/*" />
+    
+        <div class="form-group">
+            {{ form.name.label}}
+            {{ form.name(class="space", placeholder="Name")}}
+        </div>
+        <br>
+        <div class="form-group">
+          {{ form.category.label}}
+          {{ form.category(class="space", placeholder="Category")}}
+      </div>
+      <br>
+        <div class="form-group">
+            {{ form.price.label}}
+            {{ form.price(class="space", type="number", placeholder="Price")}}
+        </div>
+        <br>
+
+        <!-- <button onclick="changeimagesss(event)">TeSt</button> -->
+
+        <div class="form-group">
+            {{ form.description.label}}
+            {{ form.description(class="space", cols="35", rows="7", placeholder="Enter a description")}}
+        </div>
+        <br>
+        <!-- <div class="form-group" >
+            {{ form.picture.label }}
+            {{ form.picture(class="form-control", id="uploadedPicture", onchange="changeimagesss(event.target.files[0])")}}
+              {% if form.picture.errors %}
+                {% for error in form.picture.errors %}
+                <span class="text-danger">{{error}}</span></br>
+              {% endfor %}
+            {% endif%}
+          </div> -->
+
+          <div style="display: none;">
+            {{form.link.label}}
+            {{form.link (id="firebaseLink")}}
+          </div>
+
+          {% if update %}
+            <div style="text-align: center;" id="submitButton"  class="form-group">
+              {{form.submit (class="button", value="Update")}}
+            </div>
+          {% else %}
+            <div style="text-align: center;" id="submitButton" class="form-group">
+              {{form.submit (class="button")}}
+            </div>
+          {% endif %}
+    </form>
+    {% if update %}
+    <a href="{{url_for("delete",itemid=item.id)}}">
+    <div style="text-align: center;">
+      <button id="uploadForm" class="button" type="button" style="background-color: red; color: white;">
+        Delete Item
+      </button>
+      
+    </div>
+  </a>
+  {% endif %}
+
+</div>
+
+
+<script>
+    $("#image-picker").change(function (event) {
+        readURL(this);
+        document.getElementById('error').style.display = 'none';
+    
+    });
+        function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            pushImage(input.files[0])
+    
+            reader.onload = function (e) {
+                $('#image-preview').attr('src', e.target.result);
+            }
+    
+            reader.readAsDataURL(input.files[0]);
+    
+    
+        }
+    }
+    </script>
+    
+    
+    <script>
+    
+        var firebaseLink = document.getElementById("firebaseLink").innerText
+        // Push batch images to storage and store references in the database
+        var pushImage = function (file) {
+            document.getElementById('submitButton').innerHTML = `
+            <button class="button" style="background-color: #da2d2770;"><i class="fa fa-pause-circle-o" aria-hidden="true" style="color:'white'"></i>Please wait while we upload your image</button>
+            `
+    
+           // var uid = firebase.auth().currentUser.uid;
+           // Create storage reference
+           var ref = firebase.storage().ref(`/ineruu-142dc-default-rtdb/ineruu/`).child(file.name + ".jpg");
+
+       
+           // Upload file and get task
+           var task = ref.put(file, {contentType: file.type});
+        
+           // Monitor task for progress
+           task.on('state_changed',
+               // Shows progress of task
+               function progress(snapshot) {
+                   var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                   console.log(percentage);
+               },
+               // Shows any errors occurring during progress
+               function error(err) {
+                   // Handle unsuccessful uploads
+                   console.log(err.message);
+       
+               },
+               // Shows when task is completed
+               function complete() {
+                   // Handle successful uploads on complete
+                   var image = task.snapshot.downloadUrl;
+                   var secondImage = task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+               console.log('File available at', downloadURL);
+            //    firebaseLink = downloadURL
+               document.getElementById("firebaseLink").value = downloadURL
+               console.log("Firebase Link: " + firebaseLink)
+                document.getElementById('submitButton').innerHTML = `{{form.submit (class="button")}}`
+    
+             });
+                   console.log(task);
+                   console.log(image);
+                  //  console.log(secondImage.PromiseResult).then(res => {
+                  //      console.log("THis is" + res)
+                  //  });
+       
+                   // Data model to be uploaded to the database
+                   var data = {
+                       imageUrl: image
+                   };
+                   
+                   // var db = firebase.database().ref(/GHotelBookMan/Hotels/${uid}/Images).push();
+                   // db.set(data).then(() => {
+                   //     row.empty();
+                   //     loadCurrentHotel(uid);
+                   // });
+               });  
+       };
+       
+       
+         function changeimagesss(event) {
+           console.log(event)
+           // console.log(event.target.files[0])
+           // var uploadItem = event.target.files[0]
+           // console.log(uploadItem)
+           pushImage(event)
+       
+           
+         }
+       
+        </script>
+{% endblock %}

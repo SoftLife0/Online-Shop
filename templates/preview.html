@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+        <h4 style="margin: 0;">{{item.name}}</h4>
+    </div>
+
+    <div style="width: 80vw; height: 100%; object-fit: contain; margin: auto; overflow: hidden; text-align: center;">
+        <img style="width: 100%; margin-bottom: 10px; margin: auto;" src="{{item.image}}">
+    </div>
+     
+<div style="display: flex; justify-content: space-between;">
+    <h1 class="text-muted">Ghc {{item.price}}</h1>
+   
+</div>
+
+    <h6>{{item.category}}</h6>
+    <!-- <hr> -->
+
+    <h6 class="text-muted">Item Description</h6>
+    <h6>{{item.description}}</h6>
+
+   
+    <div style="display: flex;">
+        <a style="text-decoration: none; width: 100%; color: white;" href="{{url_for('updateCart', itemId=item.id)}}">
+            <button style="width: 100%;" class="button">
+                <i class="fas fa-phone-alt"></i>
+                Add To Cart
+            </button>
+        </a>
+    </div>
+    <hr>
+</div>
+
+<script>
+cart = sessionStorage.getItem('cart')
+console.log(cart)
+
+function addItemToCart(itemId){
+  sessionStorage.setItem('cart' , itemId)
+}
+
+</script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container">
+
+<br/>
+<h1>{{category}}</h1>
+<h6 class="text-muted" style="text-decoration:'none'; color: aqua;"><a href="{{url_for('categories')}}"> All Categories</a> > {{category}}</h6 class="text-muted">
+{% for item in items %}
+<a style="text-decoration:none; color: black;" href="{{url_for('preview', itemid = item.id)}}">
+    <div class="row result" style="margin: 20px auto;">
+        <div style="display: flex; padding: 0;">
+            <div style="width: 70px; height:70px; margin-right: 10px; border-radius: 50%; overflow: hidden; border: 1px solid rgba(0, 0, 0, 0.1);">
+            <img style="width: 70px; height: 70px; object-fit: cover; border-radius: 50%; " src="{{item.image}}">
+            </div>
+            <div>
+                <h4>{{item.name}}</h4>
+                <h6 class="text-muted">Ghc {{ item.price | truncate(50) }}</h6>
+            </div>
+        </div>
+    </div>
+</a>
+
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

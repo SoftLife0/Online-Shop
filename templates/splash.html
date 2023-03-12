@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html style="width: 100%;" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buy PostPills, Contraceptives, Lubrication and Test Kits, and have them delivered to you. Only in central University">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Talanku CU</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/gifstyle.css')}}">
+
+    <meta http-equiv="refresh" content="3;hello" />
+    <script data-ad-client="ca-pub-2966551291217261" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Talanku</title>
+</head>
+<body style="display: flex;
+align-items: center;
+justify-content: center;">
+   
+
+    <!-- <div style="display: flex;  height: 100vh;">
+      <div style="align-items: center; justify-content: center; width: 100vw; height: 100vh;">
+
+      <img style="margin: auto; display: flex; justify-content: space-around; width: 100vw;" src="../static/img/gif.mp4" alt="" srcset="">
+
+        <h4 style="text-align: center;" class="sub-heading" class="gif">This application works only in Central University</h6>
+
+
+          
+          <div  style="margin:auto; width:70vw; text-align: center;">
+            <a href="{{url_for('home')}}">
+              <div class="space" style="background-color:  rgb(255, 134, 154);; font-weight: bold;color: white; "
+              >Yes, I am in Central University</h6>
+            </div>
+
+            </a>
+
+
+          </div>
+        </div>
+    </div> -->
+<a href="{{url_for("home")}}">
+
+    <div style="align-items: center;">
+      <div>
+        <img style="width: 100%;" src="../static/img/gif.mp4" alt="" srcset="">
+      </div>
+</a>
+
+      <!-- <h6 style="text-align: center;">This application only works in central university</h6> -->
+
+      <!-- <a href="{{url_for('home')}}">
+      <button class="space" style="background-color:  rgb(255, 134, 154);; color: white;">Yes, I am in central University</button>
+        </a> -->
+    </div>
+
+
+<script>
+    var i = 0;
+    var txt = 'Food delivery in less than 10 minutes.';
+    var speed = 170;
+    
+    function typeWriter() {
+    document.getElementById("eat").style.display = "none"
+      if (i < txt.length) {
+        document.getElementById("hungry").innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    // function vanish{
+    //     document.getElementById("eat").style.display = "none"
+    // }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% for user in allusers %}
+<h1>{{user.phone}}</h1>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+<h1 class="sub-heading">All Items</h1>
+{% for item in items %}
+<a style="color: black; text-decoration: none;" href="{{url_for('update', itemid=item.id)}}">
+<div class="options-button space"> 
+        <h6>{{item.name}}</h6>
+    <div style="display: flex; justify-content: space-between;">
+        <h6 class="text-muted">Ghc{{item.price}}</h6>
+        <a href="{{url_for("admindelete", itemid=item.id)}}">
+            <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i>
+        </a>
+    </div>
+    <!-- <br> -->
+</div>
+</a>
+{% endfor %}
+</div>
+
+{% endblock %}

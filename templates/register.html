@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container" style="padding: 20px;">
+    <h3 class="sub-heading">Hello,<br> Sign up to get started</h3>
+    <br>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <!-- {{ form.username.label()}} -->
+            {{ form.username(class="space", placeholder="Enter a username")}}
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+            <br/>
+            <!-- <br/> -->
+            <h6 style="font-size: smaller; margin-top: .5rem;" class="text-muted">Shouldn't be more than 10 characters</h6>
+        </div>
+        <br>
+        <div class="form-group">
+            <!-- {{ form.phone.label}} -->
+            {{ form.phone(class="space", placeholder="Enter a phone number")}}
+            {% if form.phone.errors %}
+                {% for error in form.phone.errors %}
+                    <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <br>
+
+        <div class="form-group">
+            <!-- {{ form.password.label}} -->
+            {{ form.password(class="space", placeholder="Enter a password")}}
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <br>
+
+        <div class="form-group">
+            <!-- {{ form.confirm_password.label}} -->
+            {{ form.confirm_password(class="space", placeholder="Confirm Password")}}
+        </div>
+        <br>
+        <div class="form-group" style="text-align: center;">
+            {{form.submit (class="login-button")}}
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

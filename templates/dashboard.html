@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+
+<h4>Your Dashboard</h4>
+
+<a href="{{url_for('allusers')}}">
+    <div class="board">
+        <h4>Users</h4>
+    </div>
+</a>
+
+<a href="{{url_for('verify')}}">
+    <div class="board">
+        <h4>Verifications</h4>
+    </div>
+</a>
+
+<div class="board">
+    <h4>Items</h4>
+</div>
+
+</div>
+
+{% endblock %}

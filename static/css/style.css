@@ -1,0 +1,152 @@
+body{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Plus Jakarta Display', sans-serif;
+}
+
+a{
+  text-decoration:none ;
+  color: black;
+}
+
+.scrolling-wrapper-flexbox {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+}
+.ellipse{
+  width: 50px;
+  height: 50px;
+  background-color:  green;
+  border-radius: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+}
+.options-button{
+  border: none;
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  border :2px solid rgba(0, 0, 0, 0.205);
+  color: rgba(0, 0, 0, 0.486);
+  font-weight: bold;
+  padding: 20px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.flow{
+  display: flex;
+  justify-content: space-between;
+}
+/* ---------- */
+
+.demoWrapper {
+  padding: 10px;
+  background: white;
+  box-sizing: border-box;
+  resize: horizontal;
+  border: 1px dashed;
+  overflow: auto;
+  max-width: 100%;
+  height: calc(100vh - 16px);
+}
+
+.card1 {
+  width: 100%;
+  padding-bottom: 75%;
+
+  background: gold; /** <-- For the demo **/
+}
+/* ---------- */
+
+.strip{
+  display: flex;
+  justify-content: space-between;
+}
+
+.strip-flex{
+  display: flex;
+}
+
+.result{
+  border: 1px solid rgba(0, 0, 0, 0.486);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.card {
+  flex: 0 0 auto;
+}
+
+.button{
+  border: none;
+  width: 45%;
+  background-color:  green;;
+  border-radius: 10px;
+  color: white;
+  padding: 20px;
+  margin: 10px 0;
+}
+
+.login-button{
+  border: none;
+  width: 100%;
+  background-color:  green;;
+  border-radius: 10px;
+  color: white;
+  padding: 20px;
+  margin: 10px 0;
+
+}
+
+.logout{
+  border: none;
+  width: 90%;
+  background-color: red;
+  border-radius: 10px;
+  color: white;
+  padding: 20px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.space{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  border: none;
+  box-shadow: 2px 2px 10px 0px rgba(136, 136, 136, 0.3);
+  background-color: white;
+  font-family: 'Plus Jakarta Display', sans-serif;
+}
+
+.landing{
+  width: 100vw;
+  height: 50vh;
+  background-color:  green;
+  background-image: url(../img/f683689acb8f3382022a27ceb5f66b3d.jpg);
+}
+
+.board{
+  background-color: rgba(128, 128, 128, 0.521);
+  border-radius: 20px;
+  text-align: center;
+  padding: 30px;
+  margin-bottom:20px ;
+}
+
+.sub-heading{
+  font-weight: 500;
+  font-family: 'Plus Jakarta Display', sans-serif;
+
+}
+
+.spaceform{
+  background-color: teal;
+}

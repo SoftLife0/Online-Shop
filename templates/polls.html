@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container" style="padding: 20px;">
+    <h3 class="sub-heading">Poll results for: <br> A Night Under The Stars✨</h3>
+    <h6 class="text-muted">You can promote your choice by dialing <span style="color:greenfont-weight: bold;"> *920*127*1# </span> and sharing with your friends!</h6>
+    <br>
+
+    {% for movie in poll %}
+
+        {% if loop.index == 1 %}
+            <div data-aos="fade-up" class="space" style="display: flex; margin-bottom: 2vh; background-color:rgb(255, 134, 154);color: white;">
+        {% else %}
+            <div class="space" data-aos-delay="{{loop.index}}00" data-aos="fade-up" style="display: flex; margin-bottom: 2vh;">
+        {% endif %}
+        <h6 style=" margin-right:10px;">{{loop.index}}</h6>
+        <h6>{{movie.name}}</h6>
+        <!-- <h6>{{movie.count}}</h6> -->
+    </div>
+    {% endfor %}
+
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  AOS.init();
+</script>
+
+<script>
+
+console.log(localStorage.getItem('cart'))
+document.getElementById('items').value = localStorage.getItem('cart')
+document.getElementById('price').value = localStorage.getItem('cartTotal')
+</script>
+
+{% endblock %}

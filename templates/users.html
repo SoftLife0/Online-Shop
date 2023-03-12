@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+<h1 class="sub-heading">All Items</h1>
+{% for user in users %}
+<div class="options-button space"> 
+        <h6>{{user.username}}</h6>
+    <div style="display: flex; justify-content: space-between;">
+        <h6 class="text-muted">{{user.phone}}</h6>
+            <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

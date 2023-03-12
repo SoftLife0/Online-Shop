@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container" style="padding: 20px;">
+    <h3 class="sub-heading">Hello,<br> Please provide this information for delivery</h3>
+    <br>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <!-- {{ form.username.label()}} -->
+            {{ form.username(class="space", placeholder="Enter a username")}}
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+            <br/>
+            <!-- <br/> -->
+            <h6 style="font-size: smaller; margin-top: .5rem;" class="text-muted">This is to just confirm your package when the delivery gets to you</h6>
+        </div>
+        <br>
+        <div class="form-group">
+            <!-- {{ form.phone.label}} -->
+            {{ form.phone(class="space", placeholder="Enter a phone number")}}
+            {% if form.phone.errors %}
+                {% for error in form.phone.errors %}
+                    <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <h6 style="font-size: smaller; margin-top: .5rem;" class="text-muted">Please confirm this number so we can reach you.</h6>
+        <br>
+
+
+        <div class="form-group">
+
+            {{ form.location(class="space", placeholder="Enter a location")}}
+            {% if form.location.errors %}
+                {% for error in form.location.errors %}
+                    <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <h6 style="font-size: smaller; margin-top: .5rem;" class="text-muted">Eg: Pronto Block 6 Room 12</h6>
+       
+        <div class="form-group" style="display: none;">
+            {{ form.items(class="space", placeholder="Enter a location", id="items")}}
+        </div>
+
+        <div class="form-group" style="display: none;">
+            {{ form.price(class="space", placeholder="Price", id="price")}}
+        </div>
+
+        <br>
+        <br>
+        <div class="form-group" style="text-align: center;">
+            {{form.submit (class="login-button")}}
+        </div>
+    </form>
+</div>
+
+
+<script>
+console.log(localStorage.getItem('cart'))
+document.getElementById('items').value = localStorage.getItem('cart')
+document.getElementById('price').value = localStorage.getItem('cartTotal')
+</script>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+
+    <br/>
+    <h4>Thank You!</h4>
+    Order Id {{order.id}}
+    <h6 class="text-muted">Please do be informed that talanku.com functions on anonumousity and is only available in Central University for now.</h6>
+
+    <h1 style="margin: auto; text-align: center; font-size :100px;">
+        GHC {{order.price}}
+    </h1>
+
+    <br/>
+<div style="display: flex; justify-content: space-around;">
+    <button style="width: 80%;" class="button">
+        <a style="text-decoration: none; color: white;" href="tel:+23354245436">
+            <i class="fas fa-phone-alt"></i>
+             Call To Complaint
+        </a>
+        </button>
+</div>
+
+
+</div>
+
+{% endblock %}

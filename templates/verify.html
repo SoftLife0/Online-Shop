@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <h4>Verify the following accounts</h4>
+    <hr>
+
+<div class="board">
+    <div class="strip">
+        <h4>Nana Kweku</h4>
+        <input type="checkbox">
+    </div>
+</div>
+<a href="{{url_for('sendmessage')}}">
+    <div style="text-align: center;">
+        <button class="btn" style="background-color:  rgb(255, 134, 154);; color: white;">Submit</button>
+    </div>
+</a>
+    {% endblock %}

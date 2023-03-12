@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+
+    <br/>
+    <h4>Your Cart</h4>
+    <h6 class="text-muted">Your Total: <span id="cartTotal">0</span></h6>
+    <br/>
+
+{% for item in items %}
+<a style="color: black; text-decoration: none;">
+    <div class="options-button space" style="display: flex;">
+        <div style="width: 70px; height:70px; margin-right: 10px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, 0.1);">
+            <img style="width: 70px; height: 70px; object-fit: cover; border-radius: 50%;" src="{{item.image}}">
+        </div>
+
+        <div style="width: 100%;">
+
+        <div style="display: flex; justify-content: space-between;">
+            <h4 class="name" style="color: black;">{{item.name}}</h4>
+            <a href="{{url_for("delete", itemid=item.id)}}">
+                <h6 style="color: red"><i style="margin: auto;" class="fa fa-trash" aria-hidden="true"></i> Remove</h6>
+            </div>
+        </a>
+        <div style="display: flex; justify-content: space-between;" id="cartCalc">
+            <h6 class="price">Ghc<span class="priceValue">{{item.price}}</span></h6>
+            <h6 style="display: none;" class="price">Ghc<span class="defaultPriceValue">{{item.price}}</span></h6>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="display: flex;">
+                    <i onclick="add(event)" id="add" class="fa fa-plus" aria-hidden="true"></i>
+                    <h6 style="padding: 0 30px;" class="output" id="output">1</h6>
+                    <!-- <h6 style="padding: 0 30px;" class="defaultOutput" id="defaultOutput">1</h6> -->
+                    <i onclick="subtract(event)" id="subtract" class="fa fa-minus subtract" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
+    </div>
+</a>
+{% endfor %}
+
+
+<div >
+
+    <form action="" method="post">
+    <input name="items" style="display: none;" id="inputForm" type="text">
+    <button onclick="saveCart()" type="submit" style="width: 100%; font-weight: bold; display: flex; justify-content: center;" class="button">
+            <!-- <i class="fas fa-phone-alt"></i> -->
+            <!-- <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> -->
+             Buy Now Ghc<span  id="cartTotal2"></span>
+    </button>
+    </form>
+
+</div>
+
+
+
+
+</div>
+
+
+<script>
+       
+    window.onload = getAllItems()
+    window.onload = total()
+
+    function add(event){
+        // The row that has the quantity and its controls, it also has the price per item
+        let priceRow = event.target.parentElement;
+        console.log(priceRow);
+
+        // This is the number inbetween the counter
+        let quantity = parseInt(priceRow.getElementsByClassName('output')[0].innerText);
+        newQuantity = quantity + 1;
+        event.target.parentElement.getElementsByClassName('output')[0].innerText = newQuantity;
+        // We've set the new quantityby adding 1
+
+        totalPrice = event.target.parentElement.getElementsByClassName('output')[0].parentElement.parentElement.parentElement.getElementsByClassName('priceValue')[0].innerText
+        console.log( "totalPrice: "+ totalPrice)
+
+        defaultPrice = event.target.parentElement.getElementsByClassName('output')[0].parentElement.parentElement.parentElement.getElementsByClassName('defaultPriceValue')[0].innerText 
+        console.log('defaultPrice:' + defaultPrice)
+        // Default price value doesnt change
+
+        let newTotal = defaultPrice * newQuantity
+        console.log("NewTotal: " + newTotal)
+        event.target.parentElement.getElementsByClassName('output')[0].parentElement.parentElement.parentElement.getElementsByClassName('priceValue')[0].innerText = newTotal
+
+        total()
+
+    }
+
+    function subtract(event){
+         // The row that has the quantity and its controls, it also has the price per item
+        let priceRow = event.target.parentElement;
+        console.log(priceRow);
+
+        // This is the number inbetween the counter
+        let quantity = parseInt(priceRow.getElementsByClassName('output')[0].innerText);
+        if (quantity > 1){
+            newQuantity = quantity - 1;
+        }
+        event.target.parentElement.getElementsByClassName('output')[0].innerText = newQuantity;
+        // We've set the new quantityby adding 1
+
+        totalPrice = event.target.parentElement.getElementsByClassName('output')[0].parentElement.parentElement.parentElement.getElementsByClassName('priceValue')[0].innerText
+        console.log( "totalPrice: "+ totalPrice)
+
+        defaultPrice = event.target.parentElement.getElementsByClassName('output')[0].parentElement.parentElement.parentElement.getElementsByClassName('defaultPriceValue')[0].innerText 
+        console.log('defaultPrice:' + defaultPrice)
+        // Default price value doesnt change
+
+        let newTotal = defaultPrice * newQuantity
+        console.log("NewTotal: " + newTotal)
+        event.target.parentElement.getElementsByClassName('output')[0].parentElement.parentElement.parentElement.getElementsByClassName('priceValue')[0].innerText = newTotal
+
+        total()
+    }
+
+   
+
+    function total(){
+        array = document.getElementsByClassName("priceValue")
+        console.log(array)
+        let cartTotal = 0
+        for (let index = 0; index < array.length; index++) {
+            const element = parseInt(array[index].innerText);
+            cartTotal = cartTotal + element
+            console.log(cartTotal)
+        }
+        console.log("Your cart total is:" + cartTotal)
+        document.getElementById('cartTotal').innerText = cartTotal
+        document.getElementById('cartTotal2').innerText = cartTotal
+
+        console.log("getAllItems")
+        getAllItems()
+
+    }
+
+    function getAllItems(){
+        array = document.getElementsByClassName("space")
+        console.log(array)
+        let items = []
+        for (let index = 0; index < array.length; index++) {
+            const name = array[index].getElementsByClassName('name')[0].innerText
+            const price = array[index].getElementsByClassName('priceValue')[0].innerText
+            const quantity = array[index].getElementsByClassName('output')[0].innerText
+            let itemInfo = name + " * " + quantity + " = " + price
+            console.log(itemInfo)
+            items.push(itemInfo)
+        }   
+        itemsTotal = document.getElementById('cartTotal').innerText
+        items.push("Total = " + itemsTotal)
+        console.log(items)
+        // Fill the form
+        document.getElementById('inputForm').value = items
+    }
+
+    function saveCart(){
+        // document.getElementById('inputForm').value = items
+        localStorage.setItem('cart', document.getElementById('inputForm').value)
+        localStorage.setItem('cartTotal', document.getElementById('cartTotal').innerText)
+
+    }
+
+    </script>
+
+{% endblock %}

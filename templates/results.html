@@ -1,0 +1,38 @@
+{% extends "base.html" %} 
+
+{% block body %}
+<div class="container">
+
+<!-- Split search query into words-->
+{% set find = search.split() %}
+<!-- Print Search Query -->
+<h4 style="margin-top: 10px;"><i class="fas fa-angle-left" style="color:  rgb(255, 134, 154);"></i> Search results for {{find[0]}}</h4>
+{% for item in items %}
+        {% set word = item.name.split() %}
+        <!-- for the first word in the chosen item, -->
+            {% for i in word %}
+            <!-- check if the first word in search = first word in item -->
+                {% if search == i %}
+                    
+                    <!-- <h4>{{item}}</h4> -->
+                    <div class="row result" style="margin: 20px;">
+                        <div style="display: flex; padding: 0;">
+                            <div style="width: 70px; height:70px; margin-right: 10px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(0, 0, 0, 0.1);">
+                            <img style="width: 100%;" src="../static/items/{{item.image}}">
+                            </div>
+                            <div>
+                                <h4>{{item.name}}</h4>
+                                <h6 class="text-muted">{{ item.description | truncate(50)  }}</h6>
+
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+
