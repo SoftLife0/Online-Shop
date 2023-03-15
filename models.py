@@ -22,6 +22,25 @@ class Item(db.Model):
 def __repr__(self): 
     return f"Item('{self.name}', '{self.category}' )"
 
+class Farm(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    owner = db.Column(db.String(), nullable=True)
+    size = db.Column(db.String())
+    crop = db.Column(db.String())
+    location = db.Column(db.String())
+    phone = db.Column(db.String())
+    price = db.Column(db.String())
+    link = db.Column(db.String())
+    otherPictures = db.Column(db.String())
+    description = db.Column(db.String())
+    picture =  db.Column (db.String(), default='default.jpg')
+    trending = db.Column (db.Boolean, default = False)
+    category = db.Column(db.String())
+
+def __repr__(self): 
+    return f"Farm('{self.owner}', '{self.phone}' )"
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)

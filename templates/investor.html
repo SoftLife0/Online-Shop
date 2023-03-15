@@ -58,42 +58,29 @@
                     <h2 style="padding-top: 1vh; font-size: 32px; font-weight: 700; margin-bottom: 3vh;">Organic food from the ground </h2>
                 </div>
                 <div class="row">
+                    {% for farm in farms %}
+                    
                     <div class="col-md-4" style="padding: 20px;">
                         <div class="card" style="margin: 8px 0; margin-left: 8px; height: 30vh; background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(../static/img/pic4.jpeg); background-size: cover;">
                             <div class="card-body" style="color: #fff;">
-                                <h4 style="margin-bottom: 4vh; font-weight: 700;">Cabbage Plantation</h4>
-                                <h6>Owner: <b> Mr.Softlife</b></h6>
-                                <h6>Location: <b> Prampram, Afloa Road</b></h6>
-                                <h6>Contact: <b> +233557025163</b></h6>
-                                <button class="btn" style="color: #fff; background: #ff4a17; font-weight: 700; margin-top: 2vh;">Get In Touch</button>
+                                <h4 style="margin-bottom: 4vh; font-weight: 700;">{{farm.name}}</h4>
+                                <h6>Owner: <b>{{farm.owner}}</b></h6>
+                                <h6>Location: <b> {{farm.location}}</b></h6>
+                                <!-- <h6>Contact: <b> +233557025163</b></h6> -->
+                                <h6>Size: <b> {{farm.size}} acres</b></h6>
+                                <a href="tel:"{{farm.phone}}>
+
+                                    <button class="btn" style="color: #fff; background: #ff4a17; font-weight: 700; margin-top: 2vh;">Get In Touch</button>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4" style="padding: 20px;">
-                        <div class="card" style="margin: 8px 0; margin-left: 8px; height: 30vh; background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(../static/img/pic5.jpeg); background-size: cover;">
-                            <div class="card-body" style="color: #fff;">
-                                <h4 style="margin-bottom: 4vh; font-weight: 700;">Watermelon Plantation</h4>
-                                <h6>Owner: <b> Mr.Softlife</b></h6>
-                                <h6>Location: <b> Prampram, Afloa Road</b></h6>
-                                <h6>Contact: <b> +233557025163</b></h6>
-                                <button class="btn" style="color: #fff; background: #ff4a17; font-weight: 700; margin-top: 2vh;">Get In Touch</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4" style="padding: 20px;">
-                        <div class="card" style="margin: 8px 0; margin-left: 8px; height: 30vh; background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(../static/img/pic7.jpeg); background-size: cover;">
-                            <div class="card-body" style="color: #fff;">
-                                <h4 style="margin-bottom: 4vh; font-weight: 700;">Poultry</h4>
-                                <h6>Owner: <b> Mr.Softlife</b></h6>
-                                <h6>Location: <b> Prampram, Afloa Road</b></h6>
-                                <h6>Contact: <b> +233557025163</b></h6>
-                                <button class="btn" style="color: #fff; background: #ff4a17; font-weight: 700; margin-top: 2vh;">Get In Touch</button>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+
+
                     
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-4" style="padding: 20px;">
                         <div class="card" style="margin: 8px 0; margin-left: 8px; height: 30vh; background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(../static/img/pic7.jpeg); background-size: cover;">
                             <div class="card-body" style="color: #fff;">
@@ -128,7 +115,7 @@
                         </div>
                     </div>
                     
-                </div>
+                </div> -->
             </div>
         </section>
         

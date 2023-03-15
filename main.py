@@ -154,6 +154,25 @@ class Ticket(db.Model):
     date_created = db.Column(db.DateTime(), default = datetime.utcnow())
 
 
+class Farm(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    owner = db.Column(db.String(), nullable=True)
+    size = db.Column(db.String())
+    crop = db.Column(db.String())
+    location = db.Column(db.String())
+    phone = db.Column(db.String())
+    price = db.Column(db.String())
+    link = db.Column(db.String())
+    otherPictures = db.Column(db.String())
+    description = db.Column(db.String())
+    picture =  db.Column (db.String(), default='default.jpg')
+    trending = db.Column (db.Boolean, default = False)
+    category = db.Column(db.String())
+
+def __repr__(self): 
+    return f"Farm('{self.owner}', '{self.phone}' )"
+
     
     def __repr__(self): 
         return f"Ticket('{self.id}', 'Paid: {self.paid}'  )"
@@ -365,16 +384,16 @@ def searchal(searchquery):
 #         text = text.replace(i, j)
 #     return text
 
-@app.route('/', methods=['POST','GET'])
+@app.route('/newindex', methods=['POST','GET'])
 def start():
     session['cart'] = []
     return render_template('splash.html')
 
-@app.route('/easypill', methods=['POST','GET'])
-def easypill():
+
+def sendsms(phone,message):
     api_key = "aniXLCfDJ2S0F1joBHuM0FcmH" #Remember to put your own API Key here
-    phone = "0204716768" #SMS recepient"s phone number
-    message = "You have a new order please go to your dashboard and check it out"
+    # phone = "0545977791" #SMS recepient"s phone number
+    # message = "You have a new order please go to your dashboard and check it out"
     sender_id = "PrestoSl" #11 Characters maximum
     send_sms(api_key,phone,message,sender_id)
 
@@ -430,7 +449,11 @@ def home():
 def testing():
     return render_template('grid.html')
 
-@app.route('/newindex')
+# @app.route('/investor', methods=['GET', 'POST'])
+# def investor():
+#     return render_template('investor.html')
+
+@app.route('/')
 def newindex():
     return render_template('newindex.html')
 
@@ -440,11 +463,13 @@ def newabout():
 
 @app.route('/investor')
 def investor():
-    return render_template('investor.html')
+    farms = Farm.query.all()
+    return render_template("investor.html", farms=farms)
 
 @app.route('/product')
 def product():
-    return render_template('product.html')
+    items = Item.query.order_by(Item.id.desc()).limit(20).all()
+    return render_template('product.html', items=items)
 
 @app.route('/form')
 def form():
@@ -611,10 +636,72 @@ def additem():
         params = "New Item Added\n" + form.name.data + '\n' + "By " + current_user.username + " "
         sendtelegram(params)
         return redirect(url_for('account'))
-    elif not form.is_submitted():
+    else:
+        print(form.errors)
         print(form.errors)
         flash('There was a problem, please try again.','danger')
     return render_template('additemcopy.html', form=form)
+
+@app.route('/addfarm', methods=['POST','GET'])
+def addfarm():
+    form = FarmForm()
+    if request.method == 'POST':
+        print("This is a post request")
+        if form.validate_on_submit():
+            print("Success")
+            pic = 'default.png'
+            pictures = 'default.png'
+            newFarm = Farm(
+                name = form.name.data, 
+                owner = form.owner.data, 
+                size = form.size.data, 
+                crop = form.crop.data, 
+                location = form.location.data, 
+                phone = form.phone.data, 
+                price = form.price.data, 
+                description = form.description.data, 
+                )
+            db.session.add(newFarm)
+            db.session.commit()
+            flash(f'New Item has been added', 'success')
+            sendsms(form.phone.data,"Hello, "+ form.owner.data + " your farm has been listed on the investor portal. If you need assistance you can reach out to us on +233545977791")
+            return redirect(url_for('account'))
+        else:
+            print("form.errors")
+            print(form.errors)
+            flash('There was a problem, please try again.','danger')
+    else:
+        print("request.method")
+        print(request.method)
+    return render_template('investorform.html', form=form)
+
+@app.route('/farm', methods=['GET', 'POST'])
+def farm():
+    return render_template('farm.html')
+
+@app.route('/requestExt', methods=['POST','GET'])
+def requestExt():
+    form = ExtensionForm()
+    if request.method == 'POST':
+        print("This is a post request")
+        if form.validate_on_submit():
+            print("Success")
+            pic = 'default.png'
+            pictures = 'default.png'
+            # new_item = Item(name = form.name.data, category=form.category.data, price = form.price.data, image=form.link.data, description = form.description.data, vendor = current_user.id)
+            # db.session.add(new_item)
+            # db.session.commit()
+            flash(f'Extension Officer Has been Requested', 'success')
+            sendsms(form.phone.data,"Hello, "+ form.owner.data + " an extension officer will be sent to you during the course of this week. Thank you")
+            return redirect(url_for('newindex'))
+        else:
+            print("form.errors")
+            print(form.errors)
+            flash('There was a problem, please try again.','danger')
+    else:
+        print("request.method")
+        print(request.method)
+    return render_template('extensionOfficerForm.html', form=form)
 
 def sendtelegram(params):
     url = "https://api.telegram.org/bot5697243522:AAEeALOhEg7MxRN7rVM1MXnUKWRVgm9eTyg/sendMessage?chat_id=-1001858967717&text=" + urllib.parse.quote(params)

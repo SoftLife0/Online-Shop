@@ -43,6 +43,38 @@ class ItemForm(FlaskForm):
     category = SelectField('Category', choices=[('Farm', 'Farm'), ('Herb','Herb'), ('Medication','Medication'), ('Corbs','Corbs'), ('Haemoglobin','Haemoglobin') ])
     other_pictures = MultipleFileField('Choose your other pictures',  validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Add Item')
+
+class FarmForm(FlaskForm):
+    name = StringField('Farm Name', validators=[Length(max=50, message="This should be less than 50 characters")])
+    owner = StringField('Owner Name')
+    email = StringField('Email', validators=[Length(max=50, message="This should be less than 50 characters")])
+    size = StringField('Size')
+    crop = StringField('Crop')
+    location = StringField('Location')
+    phone = StringField('Contact Number')
+    price = IntegerField('Price')
+    description = StringField('Tell us about your farm', widget=TextArea())
+    picture = FileField('Add a picture', validators=[ FileAllowed(['jpg', 'png','jpeg'])])
+    link = StringField('Firebase Link')
+    # category = SelectField('Category', choices=[('Farm', 'Farm'), ('Herb','Herb'), ('Medication','Medication'), ('Corbs','Corbs'), ('Haemoglobin','Haemoglobin') ])
+    other_pictures = MultipleFileField('Choose your other pictures',  validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Add Item')
+
+class ExtensionForm(FlaskForm):
+    name = StringField('Farm Name', validators=[Length(max=50, message="This should be less than 50 characters")])
+    owner = StringField('Owner Name')
+    email = StringField('Email', validators=[Length(max=50, message="This should be less than 50 characters")])
+    size = StringField('Size')
+    crop = StringField('Crop')
+    location = StringField('Location')
+    phone = StringField('Contact Number')
+    price = IntegerField('Price')
+    description = StringField('Tell us about your farm', widget=TextArea())
+    picture = FileField('Add a picture', validators=[ FileAllowed(['jpg', 'png','jpeg'])])
+    link = StringField('Firebase Link')
+    # category = SelectField('Category', choices=[('Farm', 'Farm'), ('Herb','Herb'), ('Medication','Medication'), ('Corbs','Corbs'), ('Haemoglobin','Haemoglobin') ])
+    other_pictures = MultipleFileField('Choose your other pictures',  validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Add Item')
  
 class LoginForm(FlaskForm):
     phone = StringField('Phone', validators=[DataRequired(), Length(min=10, max=10, message="Number must be 10 digits")])

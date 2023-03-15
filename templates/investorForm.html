@@ -41,7 +41,7 @@
                     <div class="line" style="width: 40px; height: 3px; margin-right: 12px; background-color: #fff;"></div>
                     <div class="text" style="color: #fff;">Investors Form</div>
                 </div>
-                <h1>Kindly fill the form below <br> to invest</h1>
+                <h1>Upload your farm<br> for investors</h1>
                 
             </div>
         </div>
@@ -50,26 +50,37 @@
 
  <div class="container" style="margin-top: 1vh;">
     <div style="padding: 15px;">
-        <form action="">
+        <form method="POST">
             {{form.hidden_tag()}}
-
+            <!-- <div class="progress" style="height: 5px; margin-bottom: 5vh;">
+                <div class="progress-bar bg-primary" role="progressbar" width="100" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div> -->
             
   
             <div class="form-floating mb-3">
                 {{form.name (class="form-control webForm", placeholder="Enter your name")}} 
                 {{form.name.label}}
               </div>
+
               <div class="form-floating mb-3">
-                  {{form.email (class="form-control webForm", placeholder="Enter your name")}} 
-                  {{form.email.label}}
-              </div>
-              <div class="form-floating mb-3">
-                  {{form.picture (class="form-control webForm", placeholder="Enter your name")}} 
-                  {{form.picture.label}}
+                  {{form.owner (class="form-control webForm", placeholder="Enter your name")}} 
+                  {{form.owner.label}}
               </div>
               <div class="form-floating mb-3">
                   {{form.size (class="form-control webForm", placeholder="Enter")}} 
                   {{form.size.label}}
+              </div>
+              <div class="form-floating mb-3">
+                  {{form.phone (class="form-control webForm", placeholder="Enter")}} 
+                  {{form.phone.label}}
+                </div>
+              <div class="form-floating mb-3">
+                  {{form.description (class="form-control webForm", placeholder="Enter", cols="35", rows="7", placeholder="Enter a description")}} 
+                  {{form.description.label}}
+              </div>
+              <div class="form-floating mb-3">
+                  {{form.location (class="form-control webForm", placeholder="Enter")}} 
+                  {{form.location.label}}
               </div>
              
             
