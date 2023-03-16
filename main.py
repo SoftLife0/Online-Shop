@@ -153,6 +153,19 @@ class Ticket(db.Model):
     scanned = db.Column(db.Boolean, nullable=True, default=False)
     date_created = db.Column(db.DateTime(), default = datetime.utcnow())
 
+class FarmRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sessionId = db.Column(db.String())
+    typeOfRequest = db.Column(db.String())
+    name = db.Column(db.String())
+    phone = db.Column(db.String())
+    sent = db.Column(db.String())
+    location = db.Column(db.String())
+    date_created = db.Column(db.DateTime(), default = datetime.utcnow())
+
+def __repr__(self): 
+    return f"Farm('{self.name}', '{self.phone}' )"
+
 
 class Farm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -1078,25 +1091,22 @@ def fetchAllNumbers():
 
 def checkForPollSession(sessionId, data):
  # Search db for a session with that Id
-    session = Poll.query.filter_by(sessionId = sessionId).first()
+    session = FarmRequest.query.filter_by(sessionId = sessionId).first()
+
+    print("Session")
+    print(session)
     # If there is none, create one
-    if session == None :
-        session = Ticket.query.filter_by(sessionId = sessionId).first()
-
-        # session Data! 
-    elif session:
-
-        if session == None:
-            print("Session " + sessionId + " is not in the database.")
-        #  create session!
-        # print("sessionId " + getSession.sessionId + " has been found")
+    if session == None:
+        print("Session " + sessionId + " is not in the database.")
+    #  create session!
+    # print("sessionId " + getSession.sessionId + " has been found")
         
         if data == '*920*127*01':
-            newSession = Ticket(sessionId = sessionId)
+            newSession = FarmRequest(sessionId = sessionId)
             db.session.add(newSession)
             db.session.commit()
         else:
-            newSession = Poll(sessionId = sessionId)
+            newSession = FarmRequest(sessionId = sessionId)
             db.session.add(newSession)
             db.session.commit()
             print(sessionId + " session has been created")
@@ -1154,37 +1164,40 @@ def prestoTickets():
     msisdn = request.json['MSISDN']
     mobileNetwork = request.json['NETWORK']
     data = request.json['USERDATA']
+    print("data")
     print(data)
 
-    ticket = findTicketSession(request.json)
+    ticket = checkForPollSession(sessionId,data)
     print("ticket")
 
     if ticket:
-        print(ticket)
+        print(ticket.phone)
+        print(ticket.typeOfRequest)
+        print(ticket.name)
+        print(ticket.sessionId)
         
-        if ticket.phoneNumber == None:
-            ticket.phoneNumber = msisdn
+        if ticket.phone == None:
+            ticket.phone = msisdn
             db.session.commit()
-            return make_response(naloresponse(msisdn,"Welcome to Presto Tickets\n Please choose an event. \n" + getAllEvents(), True))
+            return make_response(naloresponse(msisdn,"Welcome to the Alpha Beta Request Portal. Please make a selection \n1.Request Extension Office \n2. Request Driver \n3. Request Investor \n4. Call For Support" , True))
 
-        elif ticket.event == None:
-            # if event not found
-            print(ticket.event)
-            ticket.event = data
+        elif ticket.typeOfRequest == None:
+            # if typeOfRequest not found
+            print(ticket.typeOfRequest)
+            ticket.typeOfRequest = data
             db.session.commit()
-            return make_response(naloresponse(msisdn, "Please enter your name \n00.Go Back", True ))
+            return make_response(naloresponse(msisdn, "Please enter a phoneNumber we can reach you on \n00.Go Back", True ))
 
         elif ticket.name == None:
             if data == "00":
-                ticket.event = None
+                ticket.typeOfRequest = None
                 db.session.commit()
-                return make_response(naloresponse(msisdn,"Welcome to Presto Tickets\n Please choose an event. \n" + getAllEvents(), True))
+                return make_response(naloresponse(msisdn,"Welcome to the Alpha Beta Request Portal. Please make a selection \n1.Request Extension Office \n2. Request Driver \n3. Request Investor \n4. Call For Support", True))
             else:
                 ticket.name = data
                 db.session.commit()
-                cost = Event.query.get_or_404(ticket.event).price
-                print(ticket.event)
-                return make_response(naloresponse(msisdn,"Hi "+ ticket.name +"\n1 Ticket = Ghc" + str(cost) +" \nHow many tickets are you buying? \n00. Go back", True ))
+                sendsms(ticket.name, "Hi "+ ticket.name +" your request has been recieved successfully. Some one from our team would reach out to call you soon.")
+                return make_response(naloresponse(msisdn,"Hi "+ ticket.name +" some one from our team would reach out to call you soon.", False ))
 
         elif ticket.numberOfTickets == None:
             if data == "00":
